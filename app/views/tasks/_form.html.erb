@@ -1,0 +1,45 @@
+<%= form_with(model: @task, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, required: true, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: 5 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :due_date %>
+    <%= form.date_field :due_date, min: Date.current %>
+  </div>
+
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.select :priority, ["Low", "Medium", "High"], include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tags %>
+    <%= form.text_field :tag_list, data: { role: "tagsinput" } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :assignee %>
+    <%= form.collection_select :assignee_id, User.all, :id, :name, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :attachments %>
+    <%= form.file_field :attachments, multiple: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :completed %>
+    <%= form.check_box :completed %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Task" %>
+  </div>
+<% end %>
